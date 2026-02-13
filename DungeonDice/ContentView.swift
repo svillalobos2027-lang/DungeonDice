@@ -48,12 +48,11 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .fontWeight(.medium)
                 .multilineTextAlignment(.center)
-                .scaleEffect(isDoneAnimating ? 1.0 : 0.6)
-                .opacity(isDoneAnimating ? 1.0 : 0.2)
+                .rotation3DEffect(isDoneAnimating ? .degrees(360): .degrees(0), axis: (x: 1, y: 0, z: 0))//one full rotation on x-axis only
                 .frame(height: 150)
                 .onChange(of: animationTrigger) {
                     isDoneAnimating = false//set to beginning "false" state right away
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.4)) {
+                    withAnimation(.interpolatingSpring(duration: 0.6, bounce: 0.4)) {
                         isDoneAnimating = true
                     }
                 }
